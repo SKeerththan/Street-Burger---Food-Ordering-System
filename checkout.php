@@ -12,9 +12,14 @@ function function_alert()
 
 
     echo "<script>alert('Thank you. Your Order has been placed!');</script>";
+    function_email();
     echo "<script>window.location.replace('your_orders.php');</script>";
 }
+function function_email()
+{
 
+    echo "<script>alert('The receipt had sent to your mail!');</script>";
+}
 if (empty($_SESSION["user_id"])) {
     header('location:login.php');
 } else {
@@ -62,6 +67,137 @@ if (empty($_SESSION["user_id"])) {
         <link href="css/animsition.min.css" rel="stylesheet">
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            #box {
+                display: none;
+
+            }
+
+            .align-center {
+                /* display: flex; */
+                /* height: 100vh;
+                width: 100vw; */
+                /* align-items: center;
+                justify-content: center; */
+            }
+
+            .card {
+                width: 500px;
+                height: 300px;
+                border-radius: 12px;
+                box-shadow: 2px 2px 0 #222, 2px 2px 15px rgba(0, 0, 0, 0.9);
+                background: black;
+                background: -webkit-linear-gradient(left, #000000, #282828);
+                background: -o-linear-gradient(right, #000000, #282828);
+                background: -moz-linear-gradient(right, #000000, #282828);
+                background: linear-gradient(to right, #000000, #282828)
+            }
+
+            .form {
+                padding-top: 110px;
+            }
+
+            .card-title {
+                float: left;
+                margin-left: 15px;
+            }
+
+            .logo {
+                float: right;
+                margin-top: 15px;
+                margin-right: 15px;
+            }
+
+            label {
+                display: block;
+            }
+
+            .card-number {
+                float: left;
+                margin-left: 15px;
+                margin-bottom: 10px;
+                color: white;
+            }
+
+            .card-number input {
+                height: 30px;
+                background-color: transparent;
+                border: none;
+                font-family: 'Electrolize', sans-serif;
+                color: #fff;
+            }
+
+            .card-name {
+                clear: both;
+                float: left;
+                margin-left: 15px;
+                margin-bottom: 15px;
+                color: #fff;
+            }
+
+            .card-name input {
+                height: 30px;
+                background-color: transparent;
+                border: none;
+                color: white;
+                font-family: 'Electrolize', sans-serif;
+            }
+
+            input:focus {
+                color: #fff;
+                outline: none;
+                border-bottom: 1px solid white;
+            }
+
+            .select-date {
+                clear: both;
+                float: left;
+                margin-left: 15px;
+            }
+
+            .card-cvc {
+                float: right;
+                margin-right: 15px;
+            }
+
+            .card-cvc input {
+                background-color: transparent;
+                border: none;
+                color: #fff;
+                font-family: 'Electrolize', sans-serif;
+            }
+
+            select {
+                border: none;
+                background-color: rgba(255, 255, 255, 0.2);
+                color: #fff;
+            }
+
+            option {
+                color: #000000;
+            }
+
+            .buy-button {
+                font-family: 'Electrolize', sans-serif;
+                cursor: pointer;
+                position: relative;
+                margin-top: auto;
+                margin-left: 64px;
+                margin-right: -100px;
+                padding: 10px 10px;
+                border-radius: 6px;
+                box-shadow: -2px 0px 6px 1px #000000;
+                background-color: #FFAB40;
+                border: none;
+                color: #fff;
+            }
+
+            .buy-button:hover {
+                background-color: #66BB6A;
+                transition: linear 0.2s;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -140,8 +276,6 @@ if (empty($_SESSION["user_id"])) {
                                                     <table class="table">
                                                         <tbody>
 
-
-
                                                             <tr>
                                                                 <td>Cart Subtotal</td>
                                                                 <td> <?php echo "LKR " . $item_total; ?></td>
@@ -180,9 +314,84 @@ if (empty($_SESSION["user_id"])) {
                                                     </li>
                                                     <li>
                                                         <label class="custom-control custom-radio  m-b-10">
-                                                            <input name="mod" type="radio" value="paypal" class="custom-control-input"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Paypal <img src="images/paypal.jpg" alt="" width="90"></span> </label>
+                                                            <input name="mod" type="radio" value="paypal" class="custom-control-input" id="show"> <span class="custom-control-indicator"></span> <span class="custom-control-description">Debit/Credit Card <img src="images/paypal.jpg" alt="" width="90"></span> </label>
                                                     </li>
+                                                    <!-- <li>
+                                                        <button type="submit" class="btn btn-light" onclick="window.print();" name="btnPdfOrders" class="fa fa-bars"> <i class="fa fa-solid fa-print"></i> &nbsp Print Invoice</button>
+                                                    </li> -->
                                                 </ul>
+                                                <div id="box">
+                                                    <div class="align-center">
+                                                        <div class="card">
+                                                            <header>
+                                                                <h3 class="card-title m-1" style="color: white;">Add Payment Details</h3>
+                                                                <img width="128" alt="Visa Inc. logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/128px-Visa_Inc._logo.svg.png" class="logo" />
+                                                            </header>
+
+                                                            <form action="" class="form">
+                                                                <div class="card-number">
+                                                                    <label for="number">Card Number</label>
+                                                                    <input id="number" type="text" size="40" placeholder="1234 1234 1234 1234" />
+                                                                </div>
+
+                                                                <div class="card-name">
+                                                                    <label for="name">Name</label>
+                                                                    <input id="name" type="text" size="40" placeholder="Your Name" />
+                                                                </div>
+
+                                                                <div class="input-row">
+                                                                    <div class="select-date">
+                                                                        <label for="date">Expiration</label>
+                                                                        <select name="" id="date">
+                                                                            <option value="00"></option>
+                                                                            <option value="01">01</option>
+                                                                            <option value="02">02</option>
+                                                                            <option value="03">03</option>
+                                                                            <option value="04">04</option>
+                                                                            <option value="05">05</option>
+                                                                            <option value="06">06</option>
+                                                                            <option value="07">07</option>
+                                                                            <option value="08">08</option>
+                                                                            <option value="09">09</option>
+                                                                            <option value="10">10</option>
+                                                                            <option value="11">11</option>
+                                                                            <option value="12">12</option>
+                                                                        </select>
+
+
+                                                                        <select name="" id="date">
+                                                                            <option value="0000"></option>
+
+                                                                            <option value="2019">2019</option>
+                                                                            <option value="2020">2020</option>
+                                                                            <option value="2021">2021</option>
+                                                                            <option value="2022">2022</option>
+                                                                            <option value="2023">2023</option>
+                                                                            <option value="2024">2024</option>
+                                                                            <option value="2025">2025</option>
+                                                                            <option value="2026">2026</option>
+                                                                            <option value="2027">2027</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                    <div class="card-cvc">
+                                                                        <label for="cvc">CVV</label>
+                                                                        <input id="cvc" type="text" size="5" placeholder="123" />
+                                                                    </div>
+
+                                                                    <button class="buy-button">Complete Purchase</button>
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+                                                    <br>
+                                                </div>
                                                 <p class="text-xs-center"> <input type="submit" onclick="return confirm('Do you want to confirm the order?');" name="submit" class="btn btn-success btn-block" value="Order Now"> </p>
                                             </div>
                                 </form>
@@ -243,6 +452,22 @@ if (empty($_SESSION["user_id"])) {
         <script src="js/jquery.isotope.min.js"></script>
         <script src="js/headroom.js"></script>
         <script src="js/foodpicky.min.js"></script>
+        <script>
+            const box = document.getElementById('box');
+
+            function handleRadioClick() {
+                if (document.getElementById('show').checked) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            }
+
+            const radioButtons = document.querySelectorAll('input[name="mod"]');
+            radioButtons.forEach(radio => {
+                radio.addEventListener('click', handleRadioClick);
+            });
+        </script>
     </body>
 
 </html>

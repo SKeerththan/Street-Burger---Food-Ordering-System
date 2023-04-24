@@ -78,7 +78,7 @@
         $row = mysqli_fetch_array($result);
 
         if (is_array($row)) {
-          $message = "Access granted ✅";
+          $success = "Access granted ✅";
           $_SESSION["user_id"] = $row['u_id'];
           header("refresh:1;url=index.php");
         } else {
@@ -86,7 +86,7 @@
           $result = mysqli_query($db, $loginquery); //executing
           $row = mysqli_fetch_array($result);
           if (is_array($row)) {
-            $message = "Customer Account Disabled 🚫";
+            $message = "Account Deactivated 🚫";
           } else {
             $message = "Invalid Username/Password! ⚠️";
           }
