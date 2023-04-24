@@ -6,6 +6,13 @@ include_once 'product-action.php';
 error_reporting(0);
 session_start();
 
+$ress = mysqli_query($db, "SELECT * FROM `users` WHERE u_id='" . $_SESSION["user_id"] . "'");
+$rows = mysqli_fetch_array($ress);
+$_SESSION["userEmail"] = $rows['email'];
+
+
+$o_date = "";
+
 
 function function_alert()
 {
@@ -17,8 +24,15 @@ function function_alert()
 }
 function function_email()
 {
+    $u_id = $_SESSION["user_id"];
+    $o_date = date('Y-m-d') . date("h:i:sa");
+    $message = "http://streetburger.unaux.com/orderBill.php?user_id=" . $u_id . "&order_date=" . $o_date;
+    $_SESSION["messages"] = $message;
 
-    echo "<script>alert('The receipt had sent to your mail!');</script>";
+    include_once 'mail/mailtest.php';
+    //http://streetburger.unaux.com/
+
+    echo "<script>alert('The receipt had sent to your e-mail! ');</script>";
 }
 if (empty($_SESSION["user_id"])) {
     header('location:login.php');
@@ -31,13 +45,15 @@ if (empty($_SESSION["user_id"])) {
 
         if ($_POST['submit']) {
 
-            $SQL = "insert into users_orders(u_id,title,quantity,price) values('" . $_SESSION["user_id"] . "','" . $item["title"] . "','" . $item["quantity"] . "','" . $item["price"] . "')";
+            $o_date = date('Y-m-d') . date("h:i:sa");
+            $SQL = "insert into users_orders(u_id,title,quantity,price,order_date ) values('" . $_SESSION["user_id"] . "','" . $item["title"] . "','" . $item["quantity"] . "','" . $item["price"] . "','" .    $o_date . "')";
 
             mysqli_query($db, $SQL);
 
 
             $SQL = "update users set  address='$_POST[address]' where u_id=  " . $_SESSION['user_id'];
             mysqli_query($db, $SQL);
+
 
 
 

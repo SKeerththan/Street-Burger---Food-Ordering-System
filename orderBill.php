@@ -1,3 +1,7 @@
+<?php
+include("connection/connect.php");
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -144,11 +148,22 @@
                 Jaffna, Sri Lanka <br>
                 Tel : 123-4567890
             </p>
+            <?php
+            $query_res = mysqli_query($db, "SELECT * FROM `users_orders` WHERE order_date = '$_GET[order_date]' AND u_id='$_GET[user_id]'");
+            $orderIds = "";
+            while ($row = mysqli_fetch_array($query_res)) {
+                $orderIds = $orderIds . $row['o_id'] . " ";
+            }
+            ?>
+            <!-- 2023-04-24 02:58:21 -->
             <p>
-                <b>User:</b> 0987653456789
+                <b>User ID: </b><?php echo $_GET['user_id']; ?>
             </p>
             <p>
-                <b>Order ID:</b> 0987653456789
+                <b>Order ID:</b> <?php echo $orderIds ?>
+            </p>
+            <p>
+                <b>Order Date: </b><?php echo $_GET['order_date']; ?>
             </p>
 
             <hr style="border: 1px dashed rgb(131, 131, 131); margin: 25px auto">
@@ -156,37 +171,38 @@
         <table style="width: 100%; table-layout: fixed">
             <thead>
                 <tr>
-                    <th style="width: 50px; padding-left: 0;">Sn.</th>
+                    <th style="width: 50px; padding-left: 0;">No.</th>
                     <th style="width: 220px;">Item Name</th>
                     <th>QTY</th>
                     <th style="text-align: right; padding-right: 0;">Price</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="invoice-items">
-                    <td>01</td>
-                    <td>Tropicana Purenectar Pomegr</td>
-                    <td>5 PC</td>
-                    <td style="text-align: right;">₹ 100</td>
-                </tr>
-                <tr class="invoice-items">
-                    <td>02</td>
-                    <td>Tropicana Purenectar Pomegr</td>
-                    <td>5 PC</td>
-                    <td style="text-align: right;">₹ 100</td>
-                </tr>
-                <tr class="invoice-items">
-                    <td>03</td>
-                    <td>Tropicana Purenectar Pomegr</td>
-                    <td>5 PC</td>
-                    <td style="text-align: right;">₹ 100</td>
-                </tr>
-                <tr class="invoice-items">
-                    <td>04</td>
-                    <td>Tropicana Purenectar Pomegr</td>
-                    <td>5 PC</td>
-                    <td style="text-align: right;">₹ 100</td>
-                </tr>
+                <?php
+
+                $query_res = mysqli_query($db, "SELECT * FROM `users_orders` WHERE order_date = '$_GET[order_date]' AND u_id='$_GET[user_id]'");
+                if (!mysqli_num_rows($query_res) > 0) {
+                    echo '<td colspan="6"><center>Unable to Process</center></td>';
+                } else {
+                    $number = 0;
+                    $totalQuantity = 0;
+                    $totalAmount = 0;
+
+                    while ($row = mysqli_fetch_array($query_res)) {
+                        $totalQuantity +=  ($row['quantity']);
+                        $totalAmount +=  ($row['quantity'] * $row['price']);
+                        $number++;
+                ?>
+                        <tr class="invoice-items">
+                            <td><?php echo $number; ?></td>
+                            <td><?php echo $row['title']  ?></td>
+                            <td><?php echo $row['quantity']  ?> </td>
+                            <td style="text-align: right;">LKR 100</td>
+                        </tr>
+                <?php }
+                } ?>
+                </thead>
+
 
             </tbody>
         </table>
@@ -195,14 +211,15 @@
               background: #fcbd024f;
               border-radius: 4px;">
             <thead>
+
                 <tr>
                     <th>Total</th>
-                    <th style="text-align: center;">Item (10)</th>
+                    <th style="text-align: center;">Item (<?php echo $totalQuantity; ?>)</th>
                     <th>&nbsp;</th>
-                    <th style="text-align: right;">₹ 396</th>
+                    <th style="text-align: right;">LKR <?php echo $totalAmount; ?></th>
 
                 </tr>
-            </thead>
+
 
         </table>
         <hr style="border: 1px dashed rgb(131, 131, 131); margin: 25px auto">
@@ -226,7 +243,7 @@
 
         <hr style=" border: 1px dashed rgb(131, 131, 131); margin: 25px auto">
         <div style="text-align: right;" id="box">
-            <button type="submit" class="btn btn-light" onclick="handleRadioClick();" name="btnPdfOrders" class="fa fa-bars" id="show"> <i class="fa fa-solid fa-print"></i> &nbsp Print Bill </button>
+            <button type="submit" class="btn btn-light" onclick="handleRadioClick();" name="btnPdfOrders" class="fa fa-bars" id="show"> <i class="fa fa-solid fa-print"></i> &nbspPrint Bill </button>
 
         </div>
 
