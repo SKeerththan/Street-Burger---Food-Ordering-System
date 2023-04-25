@@ -78,7 +78,7 @@
         $row = mysqli_fetch_array($result);
 
         if (is_array($row)) {
-          $success = "Access granted ✅";
+          $success = "Login Success ✅";
           $_SESSION["user_id"] = $row['u_id'];
           header("refresh:1;url=index.php");
         } else {
@@ -96,21 +96,21 @@
     ?>
 
 
-    <div class="pen-title">
+    <div class="pen-title ">
       < </div>
 
         <div class="module form-module">
-          <div class="toggle">
+          <div class="toggle ">
 
           </div>
-          <div class="form">
+          <div class="form ">
             <h2>Login to your account</h2>
             <span style="color:red;"><?php echo $message; ?></span>
             <span style="color:green;"><?php echo $success; ?></span>
             <form action="" method="post">
               <input type="text" placeholder="Username" name="username" />
               <input type="password" placeholder="Password" name="password" />
-              <input type="submit" id="buttn" name="submit" value="Login" />
+              <input type="submit" id="buttn" class="bg-success" name="submit" value="Login" />
             </form>
           </div>
 

@@ -159,7 +159,7 @@ if (isset($_POST['submit']))           //if upload btn is pressed
 
         <div class="page-wrapper">
 
-
+            <br>
 
             <div class="container-fluid">
 
@@ -172,7 +172,7 @@ if (isset($_POST['submit']))           //if upload btn is pressed
 
 
                 <div class="col-lg-12">
-                    <div class="card card-outline-primary">
+                    <div class="card card-outline-warning">
                         <div class="card-header">
                             <h4 class="m-b-0 text-white">Add Menu to Restaurant</h4>
                         </div>
@@ -250,7 +250,7 @@ if (isset($_POST['submit']))           //if upload btn is pressed
                                 </div>
                         </div>
                         <div class="form-actions">
-                            <input type="submit" name="submit" class="btn btn-primary" value="Save">
+                            <input type="submit" name="submit" class="btn btn-warning" value="Save">
                             <a href="all_menu.php" class="btn btn-inverse">Cancel</a>
                         </div>
                         </form>
@@ -258,7 +258,7 @@ if (isset($_POST['submit']))           //if upload btn is pressed
                 </div>
             </div>
 
-            <footer class="footer"> © 2022 - Online Food Ordering System </footer>
+            <footer class="footer"> © 2023 - Online Food Ordering System </footer>
 
         </div>
 

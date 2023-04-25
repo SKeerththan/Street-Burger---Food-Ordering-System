@@ -395,7 +395,7 @@ if (empty($_SESSION["user_id"])) {
                                                                         <input id="cvc" type="text" size="5" placeholder="123" />
                                                                     </div>
 
-                                                                    <button class="buy-button">Complete Purchase</button>
+                                                                    <button class="buy-button" disabled>Complete Purchase</button>
                                                                 </div>
                                                             </form>
 
@@ -445,12 +445,12 @@ if (empty($_SESSION["user_id"])) {
                         </div>
                         <div class="col-xs-12 col-sm-4 address color-gray">
                             <h5>Address</h5>
-                            <p>1086 Stockert Hollow Road, Seattle</p>
-                            <h5>Phone: 75696969855</a></h5>
+                            <p>Street Burger, M289+XFR, Jaffna, Sri Lanka</p>
+                            <h5>Phone: 123-4567890</a></h5>
                         </div>
                         <div class="col-xs-12 col-sm-5 additional-info color-gray">
-                            <h5>Addition informations</h5>
-                            <p>Join thousands of other restaurants who benefit from having partnered with us.</p>
+                            <h5>Stop. Burger time.</h5>
+                            <p>Eat clean, stay fit, and have a burger to stay sane.</p>
                         </div>
                     </div>
                 </div>

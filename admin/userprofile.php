@@ -172,7 +172,7 @@ if (strlen($_SESSION['user_id']) == 0) {
             <tr height="50">
               <td><b>Status:</b></td>
               <td><?php if ($row['status'] == 1) {
-                    echo "<div class='btn btn-primary'>Active</div>";
+                    echo "<div class='btn btn-success'>Active</div>";
                   } else {
                     echo "<div class='btn btn-danger'>Block</div>";
                   }

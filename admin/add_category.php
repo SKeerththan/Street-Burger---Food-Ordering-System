@@ -171,7 +171,7 @@ if (isset($_POST['submit'])) {
 
                                         </div>
                                         <div class="form-actions">
-                                            <input type="submit" name="submit" class="btn btn-primary" value="Save">
+                                            <input type="submit" name="submit" class="btn btn-warning" value="Save">
                                             <a href="add_category.php" class="btn btn-inverse">Cancel</a>
                                         </div>
                                 </form>

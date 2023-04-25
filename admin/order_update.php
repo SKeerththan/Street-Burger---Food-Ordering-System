@@ -150,7 +150,7 @@ if (strlen($_SESSION['user_id']) == 0) {
 
           <tr>
             <td><b>Action</b></td>
-            <td><input type="submit" name="update" class="btn btn-primary" value="Submit">
+            <td><input type="submit" name="update" class="btn btn-warning" value="Submit">
 
               <input name="Submit2" type="submit" class="btn btn-danger" value="Close this window " onClick="return f2();" style="cursor: pointer;" />
             </td>

@@ -272,11 +272,11 @@ if (isset($_POST['submit'])) {
 
         <div class="page-wrapper">
 
-            <div class="row page-titles">
+            <!-- <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-primary">Dashboard</h3>
                 </div>
-            </div>
+            </div> -->
 
             <div class="container-fluid">
 
@@ -299,7 +299,7 @@ if (isset($_POST['submit'])) {
 
 
                         <div class="col-lg-12">
-                            <div class="card card-outline-primary">
+                            <div class="card card-outline-warning">
                                 <div class="card-header">
                                     <h4 class="m-b-0 text-white">Update Restaurant Category</h4>
                                 </div>
@@ -321,7 +321,7 @@ if (isset($_POST['submit'])) {
 
                                             </div>
                                             <div class="form-actions">
-                                                <input type="submit" name="submit" class="btn btn-primary" value="Save">
+                                                <input type="submit" name="submit" class="btn btn-warning" value="Save">
                                                 <a href="add_category.php" class="btn btn-inverse">Cancel</a>
                                             </div>
                                     </form>
@@ -343,7 +343,7 @@ if (isset($_POST['submit'])) {
 
             </div>
 
-            <footer class="footer"> © 2022 - Online Food Ordering System </footer>
+            <footer class="footer"> © 2023 - Online Food Ordering System </footer>
 
         </div>
 

@@ -195,7 +195,7 @@ if (isset($_POST['submit'])) {
 
 
                         <div class="col-lg-12">
-                            <div class="card card-outline-primary">
+                            <div class="card card-outline-warning">
                                 <div class="card-header">
 
                                     <h4 class="m-b-0 text-white">Update Users</h4>
@@ -276,7 +276,7 @@ if (isset($_POST['submit'])) {
                                         </div>
                                 </div>
                                 <div class="form-actions">
-                                    <input type="submit" name="submit" class="btn btn-primary" value="Update">
+                                    <input type="submit" name="submit" class="btn btn-warning" value="Update">
                                     <a href="all_users.php" class="btn btn-inverse">Cancel</a>
                                 </div>
                                 </form>
@@ -299,7 +299,7 @@ if (isset($_POST['submit'])) {
 
             </div>
 
-            <footer class="footer"> © 2022 - Online Food Ordering System </footer>
+            <footer class="footer"> © 2023 - Online Food Ordering System </footer>
 
         </div>
 

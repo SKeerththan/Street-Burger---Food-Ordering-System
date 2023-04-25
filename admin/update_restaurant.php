@@ -225,11 +225,12 @@ if (isset($_POST['submit'])) {
 
         <div class="page-wrapper">
 
-            <div class="row page-titles">
+            <!-- <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-primary">Dashboard</h3>
                 </div>
-            </div>
+            </div> -->
+            <br>
 
             <div class="container-fluid">
 
@@ -242,7 +243,7 @@ if (isset($_POST['submit'])) {
 
 
                 <div class="col-lg-12">
-                    <div class="card card-outline-primary">
+                    <div class="card card-outline-warning">
 
                         <h4 class="m-b-0 ">Update Restaurant</h4>
 
@@ -378,14 +379,14 @@ if (isset($_POST['submit'])) {
                                 </div>
                         </div>
                         <div class="form-actions">
-                            <input type="submit" name="submit" class="btn btn-primary" value="Save">
+                            <input type="submit" name="submit" class="btn btn-warning" value="Save">
                             <a href="all_restaurant.php" class="btn btn-inverse">Cancel</a>
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <footer class="footer"> © 2022 - Online Food Ordering System</footer>
+            <footer class="footer"> © 2023 - Online Food Ordering System</footer>
         </div>
 
     </div>

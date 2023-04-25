@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
          echo "<script>alert('Password not match');</script>";
       } elseif (strlen($_POST['password']) < 6) {
          echo "<script>alert('Password Must be >=6');</script>";
-      } elseif (strlen($_POST['phone']) < 10) {
+      } elseif (!preg_match('/^[0-9]{10}+$/', $_POST['phone'])) {
          echo "<script>alert('Invalid phone number!');</script>";
       } elseif (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
          echo "<script>alert('Invalid email address please type a valid email!');</script>";

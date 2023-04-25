@@ -162,7 +162,7 @@ session_start();
                                                 <td>
                                                     <center>
                                                         <a href="javascript:void(0);" onClick="popUpWindow('order_update.php?form_id=<?php echo htmlentities($rows['o_id']); ?>');" title="Update order">
-                                                            <button type="button" class="btn btn-info">Update Order Status</button></a>
+                                                            <button type="button" class="btn btn-dark">Update Order Status</button></a>
                                                     </center>
                                                 </td>
 
@@ -176,7 +176,7 @@ session_start();
                                                 <td>
                                                     <center>
                                                         <a href="javascript:void(0);" onClick="popUpWindow('userprofile.php?newform_id=<?php echo htmlentities($rows['o_id']); ?>');" title="Update order">
-                                                            <button type="button" class="btn btn-info">View User Detials</button></a>
+                                                            <button type="button" class="btn btn-secondary">View User Detials</button></a>
                                                         <?php
                                                         $_SESSION["user_id"] = $rows['u_id'];
                                                         // echo $rows['u_id'];
