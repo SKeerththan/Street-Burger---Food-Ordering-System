@@ -135,6 +135,9 @@ session_start();
                                 </div>
 
                                 <div class="table-responsive m-t-40">
+                                    <p>
+                                        Active 🟩 Inactive 🟥 Pending 🟨
+                                    </p>
                                     <table id="myTable" class="table table-bordered table-striped table-hover">
                                         <thead class="thead-dark">
                                             <tr>
@@ -167,17 +170,19 @@ session_start();
                                                     if ($rows['status'] == 1) {
                                                         // echo "<div class='btn btn-primary'>Active</div>";
 
-                                                        $status = "Active ";
-                                                    } else {
+                                                        $status = "🟩";
+                                                    } else if ($rows['status'] == 0) {
                                                         // echo "<div class='btn btn-danger'>Blocked</div>";
 
-                                                        $status = "Deactive ";
+                                                        $status = "🟥";
+                                                    } else {
+                                                        $status = "🟨";
                                                     }
 
 
 
 
-                                                    echo ' <tr><td>' . $status . '</td>
+                                                    echo ' <tr><td style="text-align:center;font-size:20px;">' . $status . '</td>
                                                     
                                                     <td>' . $rows['username'] . '</td>
 																								<td>' . $rows['f_name'] . '</td>
@@ -187,21 +192,30 @@ session_start();
 																								<td>' . $rows['address'] . '</td>								
 																								<td>' . $rows['date'] . '</td>
 																									 <td>';
-                                                    if ($rows['status'] == 1)
-
-
+                                                    if ($rows['status'] == 1) {
                                                         echo
                                                         "<a href=deactivate.php?id=" . $rows['u_id'] . " class='btn btn-danger' >Deactivate</a>";
-                                                    else
+                                                    } else if ($rows['status'] == 0) {
+                                                        // echo "<div class='btn btn-danger'>Blocked</div>";
+
                                                         echo
                                                         "<a href=activate.php?id=" . $rows['u_id'] . " class='btn btn-success'>Activate</a>";
+                                                    } else {
+                                                        echo
+                                                        "<a href=activate.php?id=" . $rows['u_id'] . " class='btn btn-success'>Activate</a>";
+                                                    }
+
+
+
+
+
                                                     echo '</td><td >
                                                                                                      
-                                                                                                     <a href="delete_users.php?user_del=' . $rows['u_id'] . '" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:22px"></i></a> 
+                                                                                                     <a href="delete_users.php?user_del=' . $rows['u_id'] . '" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:11px"></i></a> 
 
 
 																									 <a href="update_users.php?user_upd=' . $rows['u_id'] .
-                                                        '" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit" style="font-size:22px"></i></a>
+                                                        '" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit" style="font-size:11px"></i></a>
 
 
 

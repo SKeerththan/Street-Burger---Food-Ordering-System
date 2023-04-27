@@ -226,9 +226,9 @@ hr {
 .theme-btn,
 .theme-btn.btn-lg:hover,
 .btn-secondary:hover {
-  background-color: #5cb85c;
+  background-color: #5c4ac7;
   color: #fff;
-  border: 1px solid #5cb85c;
+  border: 1px solid #5c4ac7;
 }
 
 .theme-btn-dash:hover {

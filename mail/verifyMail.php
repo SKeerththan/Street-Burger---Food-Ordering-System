@@ -3,7 +3,7 @@ session_start();
 
 require 'PHPMailer/PHPMailerAutoload.php';
 
-$invoice_Message = $_SESSION["messages"];
+$invoice_Message = $_SESSION["link"];
 
 $mail = new PHPMailer;
 
@@ -28,7 +28,7 @@ $mail->addAddress($_SESSION['userEmail'], 'Dear Customer');     // Add a recipie
 // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = 'Invoice of Orders - Street Burger';
+$mail->Subject = 'Click to verify - Street Burger';
 $mail->Body    = 'Link Added: <b>in bold!</b>' . $invoice_Message;
 
 $mail->Body = '<!DOCTYPE html>
@@ -47,17 +47,24 @@ $mail->Body = '<!DOCTYPE html>
         </div>
         <div class="card-body">
             <h5 class="card-title">🍔<b> Stree Burger </b>🍔</h5>
-            <p class="card-text">Thank you so much for your order! This is not a marketing email, just a quick thank you note for your purchase.
+            <p> Hi Customer,</p>
+            <p class="card-text">We just need to verify your email address before you can access streetburger.unaux.com 
 
             </p>
-            <p class="card-text"> Your receipt added below.</p>
-            <a href="' . $invoice_Message . '" class="btn btn-primary">Click to View 👇</a>
+
+            <p class="card-text"> Verify your email address.</p>
+            <a href="' . $invoice_Message . '" class="btn btn-primary">Click to Verify 👇</a>
+            <p>Thanks! -  <b>The Stree Burger team</b> </p>
 
         </div>
     </div>
 </body>
 
 </html>';
+
+
+
+
 
 
 

@@ -4,6 +4,23 @@
 
 session_start();
 error_reporting(0);
+function function_email($username, $password, $verify_token, $userEmail)
+{
+   // $u_id = $_SESSION["user_id"];
+   // $o_date = date('Y-m-d') . date("h:i:sa");
+   $message = "http://localhost/OnlineFood-PHP/verifyAccount.php?user_id=" . $username . "&password=" . $password . "&token=" . $verify_token;
+
+
+   $_SESSION["link"] = $message;
+   $_SESSION["userEmail"] = $userEmail;
+
+
+   include_once 'mail/verifyMail.php';
+   //http://streetburger.unaux.com/
+
+   echo "<script>alert('The verification link had sent to your e-mail! ');</script>";
+}
+
 include("connection/connect.php");
 if (isset($_POST['submit'])) {
    if (
@@ -38,11 +55,15 @@ if (isset($_POST['submit'])) {
          echo "<script>alert('Email Already exists!');</script>";
       } else {
 
+         $verify_token = md5(rand());
 
-         $mql = "INSERT INTO users(username,f_name,l_name,email,phone,password,address) VALUES('" . $_POST['username'] . "','" . $_POST['firstname'] . "','" . $_POST['lastname'] . "','" . $_POST['email'] . "','" . $_POST['phone'] . "','" . md5($_POST['password']) . "','" . $_POST['address'] . "')";
+
+         $mql = "INSERT INTO users(username,f_name,l_name,email,phone,password,status,token,address) VALUES('" . $_POST['username'] . "','" . $_POST['firstname'] . "','" . $_POST['lastname'] . "','" . $_POST['email'] . "','" . $_POST['phone'] . "','" . md5($_POST['password']) . "','2','" . $verify_token . "','" . $_POST['address'] . "')";
          mysqli_query($db, $mql);
-
+         function_email($_POST['username'], md5($_POST['password']), $verify_token, $_POST['email']);
+         $_SESSION["userEmail"] = $_POST['email'];
          header("refresh:0.1;url=login.php");
+         // header("url=mail/verifyMail.php");
       }
    }
 }

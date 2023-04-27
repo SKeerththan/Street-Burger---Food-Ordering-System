@@ -11,6 +11,8 @@
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
   <link rel="stylesheet" href="css/login.css">
+  <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+
 
   <style type="text/css">
     #buttn {
@@ -82,13 +84,20 @@
           $_SESSION["user_id"] = $row['u_id'];
           header("refresh:1;url=index.php");
         } else {
-          $loginquery = "SELECT * FROM users WHERE username='$username' && password='" . md5($password) . "'";
+          $loginquery = "SELECT * FROM users WHERE username='$username' && status='0' && password='" . md5($password) . "'";
           $result = mysqli_query($db, $loginquery); //executing
           $row = mysqli_fetch_array($result);
           if (is_array($row)) {
-            $message = "Account Deactivated 🚫";
+            $message = "Account is Deactivated 🚫";
           } else {
-            $message = "Invalid Username/Password! ⚠️";
+            $loginquery = "SELECT * FROM users WHERE username='$username' && status='2' && password='" . md5($password) . "'";
+            $result = mysqli_query($db, $loginquery); //executing
+            $row = mysqli_fetch_array($result);
+            if (is_array($row)) {
+              $warning = "Please activate your account. Check your E-mail ⏳";
+            } else {
+              $message = "Invalid Username/Password! ⚠️";
+            }
           }
         }
       }
@@ -107,9 +116,14 @@
             <h2>Login to your account</h2>
             <span style="color:red;"><?php echo $message; ?></span>
             <span style="color:green;"><?php echo $success; ?></span>
+            <span style="color:grey;"><?php echo $warning; ?></span>
             <form action="" method="post">
               <input type="text" placeholder="Username" name="username" />
               <input type="password" placeholder="Password" name="password" />
+              <!-- 
+              <div class="g-recaptcha" data-sitekey="6LdfK8ElAAAAAN9YzUgVMyTDM12sEkYfU5ix_BM3"></div>
+              <br /> -->
+
               <input type="submit" id="buttn" class="bg-success" name="submit" value="Login" />
             </form>
           </div>

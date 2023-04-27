@@ -26,10 +26,10 @@ function function_email()
 {
     $u_id = $_SESSION["user_id"];
     $o_date = date('Y-m-d') . date("h:i:sa");
-    $message = "http://streetburger.unaux.com/orderBill.php?user_id=" . $u_id . "&order_date=" . $o_date;
+    $message = "http://localhost/OnlineFood-PHP/orderBill.php?user_id=" . $u_id . "&order_date=" . $o_date;
     $_SESSION["messages"] = $message;
 
-    include_once 'mail/mailtest.php';
+    include_once 'mail/invoiceMail.php';
     //http://streetburger.unaux.com/
 
     echo "<script>alert('The receipt had sent to your e-mail! ');</script>";
