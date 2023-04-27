@@ -7,6 +7,20 @@ session_start();
 
 include_once 'product-action.php';
 
+
+if ($_POST['cancel']) {
+    echo "ddsdfffd";
+
+    // echo "<script>alert('Poda Vennai!');</script>";
+    unset($_SESSION["cart_item"]);
+    header('location:index.php');
+}
+
+
+
+
+
+
 ?>
 
 
@@ -102,8 +116,92 @@ include_once 'product-action.php';
 
             </div>
         </div>
-        <div class="container m-t-30">
-            <div class="row">
+        <div class="container m-t-30 position-relative">
+            <div class="row position-relative">
+                <div class="col-md-8">
+
+
+                    <div class="menu-widget" id="2">
+                        <div class="widget-heading">
+                            <h3 class="widget-title text-dark">
+                                MENU <a class="btn btn-link pull-right" data-toggle="collapse" href="#popular2" aria-expanded="true">
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                    <i class="fa fa-angle-down pull-right"></i>
+                                </a>
+                            </h3>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="collapse in" id="popular2">
+                            <?php
+                            $stmt = $db->prepare("select * from dishes where rs_id='$_GET[res_id]'");
+                            $stmt->execute();
+                            $products = $stmt->get_result();
+                            if (!empty($products)) {
+                                foreach ($products as $product) {
+
+
+
+                            ?>
+                                    <div class="food-item">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-lg-7">
+                                                <form method="post" action='dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=add&id=<?php echo $product['d_id']; ?>'>
+                                                    <div class="rest-logo pull-left">
+                                                        <a class="restaurant-logo pull-left" href="#"><?php echo '<img src="admin/Res_img/dishes/' . $product['img'] . '" alt="Food logo">'; ?></a>
+                                                        <br>
+
+                                                        <!-- <span class="price pull-left">LKR <?php echo $product['price']; ?></span> -->
+                                                    </div>
+
+                                                    <div class="rest-descr">
+                                                        <h6> <b><a href="#"><?php echo $product['title']; ?></b> <i style="font-size: medium;"> LKR <?php echo $product['price']; ?></i> </a></h6>
+
+                                                        <p> <?php echo $product['slogan']; ?></p>
+
+                                                    </div>
+
+                                            </div>
+
+                                            <div class="col-xs-12 col-sm-12 col-lg-4 pull-right item-cart-info">
+                                                <div class="row" style=" text-align: center;">
+
+                                                    <button type="button" onclick="qntIncrease(<?php echo $product['d_id']; ?>);" class="btn btn-warning"><span class="fa fa-solid fa-plus " aria-hidden="true"></span></button>
+                                                    &nbsp;
+
+                                                    <input type="text" id="<?php echo $product['d_id']; ?>" name="quantity" class=" btn" style="margin-left:0px;" value="1" size="6" />
+
+                                                    &nbsp;
+                                                    <button type="button" onclick="qntDecrease(<?php echo $product['d_id']; ?>);" class="btn btn-warning"><span class="fa fa-solid fa-minus " aria-hidden="true"></span></button>
+
+                                                </div>
+                                                <br>
+                                                <div class="row " style=" text-align: center;">
+                                                    <div class="col">
+                                                        <input type="submit" class="btn  btn-success " value="Add to cart" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+
+
+                            <?php
+                                }
+                            }
+
+                            ?>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
 
                     <div class="widget widget-cart">
@@ -133,7 +231,7 @@ include_once 'product-action.php';
 
                                     <div class="form-group row no-gutter">
                                         <div class="col-xs-8">
-                                            <input type="text" class="form-control b-r-0" value=<?php echo  "LKR-".$item["price"]; ?> readonly id="exampleSelect1">
+                                            <input type="text" class="form-control b-r-0" value=<?php echo  "LKR-" . $item["price"]; ?> readonly id="exampleSelect1">
 
                                         </div>
                                         <div class="col-xs-4">
@@ -164,7 +262,7 @@ include_once 'product-action.php';
                                 ?>
 
 
-                                    <a href="checkout.php?res_id=<?php echo $_GET['res_id']; ?>&action=check" class="btn btn-danger btn-lg disabled">Checkout</a>
+                                    <a href="checkout.php?res_id=<?php echo $_GET['res_id']; ?>&action=check" class="btn btn-warning btn-lg disabled">Checkout</a>
 
                                 <?php
                                 } else {
@@ -172,7 +270,12 @@ include_once 'product-action.php';
                                     <a href="checkout.php?res_id=<?php echo $_GET['res_id']; ?>&action=check" class="btn btn-success btn-lg active">Checkout</a>
                                 <?php
                                 }
+
                                 ?>
+                                <form method="post" action="#">
+
+                                    <p class="text-xs-center"> <br> <input type="submit" onclick="return confirm('Do you want to cancel the order?');" name="cancel" class="btn btn-danger btn-block" value="Cancel Order"> </p>
+                                </form>
 
                             </div>
                         </div>
@@ -183,71 +286,7 @@ include_once 'product-action.php';
                     </div>
                 </div>
 
-                <div class="col-md-8">
 
-
-                    <div class="menu-widget" id="2">
-                        <div class="widget-heading">
-                            <h3 class="widget-title text-dark">
-                                MENU <a class="btn btn-link pull-right" data-toggle="collapse" href="#popular2" aria-expanded="true">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                    <i class="fa fa-angle-down pull-right"></i>
-                                </a>
-                            </h3>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="collapse in" id="popular2">
-                            <?php
-                            $stmt = $db->prepare("select * from dishes where rs_id='$_GET[res_id]'");
-                            $stmt->execute();
-                            $products = $stmt->get_result();
-                            if (!empty($products)) {
-                                foreach ($products as $product) {
-
-
-
-                            ?>
-                                    <div class="food-item">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-lg-8">
-                                                <form method="post" action='dishes.php?res_id=<?php echo $_GET['res_id']; ?>&action=add&id=<?php echo $product['d_id']; ?>'>
-                                                    <div class="rest-logo pull-left">
-                                                        <a class="restaurant-logo pull-left" href="#"><?php echo '<img src="admin/Res_img/dishes/' . $product['img'] . '" alt="Food logo">'; ?></a>
-                                                    </div>
-
-                                                    <div class="rest-descr">
-                                                        <h6><a href="#"><?php echo $product['title']; ?></a></h6>
-                                                        <p> <?php echo $product['slogan']; ?></p>
-                                                    </div>
-
-                                            </div>
-
-                                            <div class="col-xs-12 col-sm-12 col-lg-3 pull-right item-cart-info">
-                                                <span class="price pull-left">LKR <?php echo $product['price']; ?></span>
-                                                <input class="b-r-0" type="number" name="quantity" style="margin-left:15px;" value="1" min="1" size="2" />
-
-                                                <input type="submit" class="btn theme-btn" style="margin-left:40px;" value="Add To Cart" />
-                                            </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-
-
-                            <?php
-                                }
-                            }
-
-                            ?>
-
-
-
-                        </div>
-
-                    </div>
-
-
-                </div>
 
             </div>
 
@@ -441,6 +480,23 @@ include_once 'product-action.php';
             </div>
         </div>
     </div>
+
+    <script>
+        function qntIncrease(id) {
+
+            let val = document.getElementById(id).value;
+            val++;
+            document.getElementById(id).value = val;
+        }
+
+        function qntDecrease(id) {
+            if (document.getElementById(id).value > 1) {
+                let val = document.getElementById(id).value;
+                val--;
+                document.getElementById(id).value = val;
+            }
+        }
+    </script>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>

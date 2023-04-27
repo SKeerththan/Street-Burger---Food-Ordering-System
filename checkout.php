@@ -66,6 +66,14 @@ if (empty($_SESSION["user_id"])) {
 
             function_alert();
         }
+
+
+        if ($_POST['cancel']) {
+
+
+            unset($_SESSION["cart_item"]);
+            header('location:index.php');
+        }
     }
 ?>
 
@@ -409,6 +417,8 @@ if (empty($_SESSION["user_id"])) {
                                                     <br>
                                                 </div>
                                                 <p class="text-xs-center"> <input type="submit" onclick="return confirm('Do you want to confirm the order?');" name="submit" class="btn btn-success btn-block" value="Order Now"> </p>
+
+                                                <p class="text-xs-center"> <input type="submit" onclick="return confirm('Do you want to cancel the order?');" name="cancel" class="btn btn-danger btn-block" value="Cancel Order"> </p>
                                             </div>
                                 </form>
                             </div>
