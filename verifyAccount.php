@@ -7,6 +7,8 @@ if (isset($_POST['active'])) {
     // echo "<script>alert('sss');</script></script>";
     $sql = "UPDATE `users` SET  `status`='1' where username='" . $_GET['user_id'] . "' AND password ='" . $_GET['password'] . "' and status='2' and token='" . $_GET['token'] . " '";
     $activation = mysqli_query($db, $sql);
+    header("refresh:3;url=http://streetburger.unaux.com/login.php");
+
 
     // if (!mysqli_num_rows($activation) > 0) {
 

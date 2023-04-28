@@ -191,7 +191,7 @@ if (isset($_POST['submit'])) {
 
         <div class="page-wrapper">
 
-
+            <br>
 
             <div class="container-fluid">
                 <!-- Start Page Content -->
@@ -217,14 +217,14 @@ if (isset($_POST['submit'])) {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Dish Name</label>
-                                                <input type="text" name="d_name" class="form-control">
+                                                <input type="text" name="d_name" class="form-control" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group has-danger">
                                                 <label class="control-label">Description</label>
-                                                <input type="text" name="about" class="form-control form-control-danger">
+                                                <input type="text" name="about" class="form-control form-control-danger" required>
                                             </div>
                                         </div>
 
@@ -234,14 +234,14 @@ if (isset($_POST['submit'])) {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="control-label">Price </label>
-                                                <input type="text" name="price" class="form-control" placeholder="LKR ">
+                                                <input type="text" name="price" class="form-control" placeholder="LKR " required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group has-danger">
                                                 <label class="control-label">Image</label>
-                                                <input type="file" name="file" id="lastName" class="form-control form-control-danger" placeholder="12n">
+                                                <input type="file" name="file" id="lastName" required class="form-control form-control-danger" placeholder="12n">
                                             </div>
                                         </div>
                                     </div>
@@ -259,7 +259,7 @@ if (isset($_POST['submit'])) {
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="control-label">Select Restaurant</label>
-                                                <select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                                <select name="res_name" class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" required>
                                                     <option>--Select Restaurant--</option>
                                                     <?php $ssql = "select * from restaurant";
                                                     $res = mysqli_query($db, $ssql);

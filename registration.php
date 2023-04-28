@@ -8,7 +8,7 @@ function function_email($username, $password, $verify_token, $userEmail)
 {
    // $u_id = $_SESSION["user_id"];
    // $o_date = date('Y-m-d') . date("h:i:sa");
-   $message = "http://localhost/OnlineFood-PHP/verifyAccount.php?user_id=" . $username . "&password=" . $password . "&token=" . $verify_token;
+   $message = "http://streetburger.unaux.com/verifyAccount.php?user_id=" . $username . "&password=" . $password . "&token=" . $verify_token;
 
 
    $_SESSION["link"] = $message;
