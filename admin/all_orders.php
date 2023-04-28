@@ -192,7 +192,7 @@ session_start();
                                                     }
                                                     if ($status == "closed") {
                                                     ?>
-                                                        <td> <button type="button" class="btn btn-primary"><span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button></td>
+                                                        <td> <button type="button" class="btn btn-success"><span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button></td>
                                                     <?php
                                                     }
                                                     ?>
