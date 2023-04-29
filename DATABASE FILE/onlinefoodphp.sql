@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`u_id`, `username`, `f_name`, `l_name`, `email`, `phone`, `password`, `address`, `status`, `token`, `date`) VALUES
-(7, 'keerththan', 'keerththan', 'keerththan', 'keerththan14@gmail.com', '1234567890', '4bc1df58ca9ee87b682b0d7ecdd2e535', 'keerththan', 1, '', '2023-04-27 17:08:56');
+(7, 'sss', 'sss', 'sss', '', 'ssssss', '4bc1df58ca9ee87b682b0d7ecdd2e535', 'ssssss', 1, '', '2023-04-27 17:08:56');
 
 -- --------------------------------------------------------
 
